@@ -189,8 +189,7 @@ export const AddToCartButton = (props) => {
             position: "absolute",
             width: "359px",
             height: "60px",
-            backgroundColor: "#0E6966",
-            opacity: 0.6,
+            backgroundColor: "rgba(14, 105, 102, 0.8)",
           }}
         >
           <Flex
