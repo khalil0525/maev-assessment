@@ -1,7 +1,8 @@
-import { Flex, Box, Text, Button, IconButton, Grid } from "theme-ui";
+import { Flex, Button, IconButton, Grid, Spinner } from "theme-ui";
 import { PrimaryText } from "./Text";
-import { ArrowIcon } from "./Icon";
+import { ArrowIcon, CheckMarkIcon } from "./Icon";
 import { tokens } from "../styles/theme";
+import { useState } from "react";
 
 export const PrimaryButton = (props) => {
   return (
@@ -101,6 +102,25 @@ export const TertiaryButton = (props) => {
 };
 
 export const AddToCartButton = (props) => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [isAdded, setIsAdded] = useState(false);
+
+  const handleButtonClick = () => {
+    if (!isAdded) {
+      setIsAdded(true);
+      setIsLoading(true);
+
+      setTimeout(() => {
+        setIsAdded(true);
+        setIsLoading(false);
+
+        setTimeout(() => {
+          setIsAdded(false);
+        }, 3000);
+      }, 3000);
+    }
+  };
+
   return (
     <IconButton
       variant="primary"
@@ -110,25 +130,30 @@ export const AddToCartButton = (props) => {
         cursor: "pointer",
         lineHeight: "18px",
         span: {
-          fontWeight: 400,
+          color: isAdded ? "#ffffff" : "",
         },
+        svg: {
+          color: isAdded ? "#ffffff" : "",
+        },
+        bg: isAdded ? "#0E6966" : "#e5ff00",
         "&:hover": {
           bg: "#0E6966",
         },
       }}
+      onClick={handleButtonClick}
     >
-      <Grid gap={2} columns={[2, "1fr 2fr"]}>
+      <Grid gap={5} columns={[2, "1fr 2fr"]}>
         <Flex
           sx={{
             flexDirection: "column",
             justifyContent: "center",
             alignItems: "flex-start",
-            gap: "5px",
+
+            "span:first-child": { fontSize: "16px", fontWeight: 400 },
+            "span:last-child": { fontSize: "14px", fontWeight: 300 },
           }}
         >
-          <PrimaryText
-            sx={{ span: { fontSize: "16px", fontWeight: 400 } }}
-          >{`$${props.price}`}</PrimaryText>
+          <PrimaryText>{`$${props.price}`}</PrimaryText>
           <PrimaryText
             sx={{ span: { fontSize: "14px" } }}
           >{`$${props.costPerMeal} per meal`}</PrimaryText>
@@ -139,7 +164,9 @@ export const AddToCartButton = (props) => {
             flexDirection: "column",
             justifyContent: "center",
             alignItems: "flex-end",
-            gap: "12px",
+
+            "span:first-child": { fontSize: "16px", fontWeight: 400 },
+            "span:last-child": { fontSize: "14px", fontWeight: 400 },
           }}
         >
           <Flex
@@ -149,17 +176,47 @@ export const AddToCartButton = (props) => {
               gap: "12px",
             }}
           >
-            <PrimaryText sx={{ span: { fontSize: "16px", fontWeight: 400 } }}>
-              {props.action}
-            </PrimaryText>
+            <PrimaryText>{props.action}</PrimaryText>
             <ArrowIcon />
           </Flex>
-
-          <PrimaryText sx={{ span: { fontSize: "14px", fontWeight: 400 } }}>
-            {props.subtext}
-          </PrimaryText>
+          <PrimaryText>{props.subtext}</PrimaryText>
         </Flex>
       </Grid>
+
+      {(isLoading || isAdded) && (
+        <Flex
+          sx={{
+            position: "absolute",
+            color: "#fff",
+            width: "359px",
+            height: "60px",
+            backgroundColor: "#0E6966",
+            opacity: 0.6,
+          }}
+        >
+          <Flex
+            sx={{
+              justifyContent: "center",
+              alignItems: "center",
+              width: "100%",
+            }}
+          >
+            {isLoading ? (
+              <Spinner size="40" strokeWidth="2" />
+            ) : (
+              <Flex
+                sx={{
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <CheckMarkIcon />
+                <PrimaryText>Added</PrimaryText>
+              </Flex>
+            )}
+          </Flex>
+        </Flex>
+      )}
     </IconButton>
   );
 };
