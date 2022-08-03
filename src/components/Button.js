@@ -107,12 +107,12 @@ export const AddToCartButton = (props) => {
 
   const handleButtonClick = () => {
     if (!isAdded) {
-      setIsAdded(true);
       setIsLoading(true);
+      setIsAdded(true);
 
       setTimeout(() => {
-        setIsAdded(true);
         setIsLoading(false);
+        setIsAdded(true);
 
         setTimeout(() => {
           setIsAdded(false);
