@@ -187,7 +187,6 @@ export const AddToCartButton = (props) => {
         <Flex
           sx={{
             position: "absolute",
-            color: "#fff",
             width: "359px",
             height: "60px",
             backgroundColor: "#0E6966",
