@@ -17,7 +17,7 @@ export const PrimaryButton = (props) => {
           fontWeight: 400,
         },
         "&:hover": {
-          bg: "#0E6966",
+          bg: "#0E6966!important",
         },
       }}
     >
@@ -131,9 +131,9 @@ export const AddToCartButton = (props) => {
         "span, svg": {
           color: isAdded ? "#ffffff" : "",
         },
-        bg: isAdded ? "#0E6966" : "#e5ff00",
+        bg: isAdded ? "#0E6966!important" : "#e5ff00",
         "&:hover": {
-          bg: "#0E6966",
+          bg: "#0E6966!important",
         },
       }}
       onClick={handleButtonClick}
