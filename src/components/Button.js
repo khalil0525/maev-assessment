@@ -112,7 +112,6 @@ export const AddToCartButton = (props) => {
 
       setTimeout(() => {
         setIsLoading(false);
-        setIsAdded(true);
 
         setTimeout(() => {
           setIsAdded(false);
@@ -129,10 +128,7 @@ export const AddToCartButton = (props) => {
         height: "60px",
         cursor: "pointer",
         lineHeight: "18px",
-        span: {
-          color: isAdded ? "#ffffff" : "",
-        },
-        svg: {
+        "span, svg": {
           color: isAdded ? "#ffffff" : "",
         },
         bg: isAdded ? "#0E6966" : "#e5ff00",
